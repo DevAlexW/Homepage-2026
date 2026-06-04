@@ -3,10 +3,2901 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage 2026</title>
+  <title>Meal Plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #F5F2EC;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-container {
+      width: 393px;
+      height: 90vh;
+      background-color: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12), 0 2px 12px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-scroll {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* ── iOS Status Bar: always sticky ── */
+    .ios-bar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: #0b0b0b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 14px 18px 34px;
+    }
+
+    .ios-time {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.3px;
+    }
+
+    .ios-status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Promo Bar: scrolls away ── */
+    .promo-bar {
+      background-color: #0c0c0d;
+      height: 49.5px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .promo-track {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      white-space: nowrap;
+      padding-left: 24px;
+      animation: marquee 22s linear infinite;
+    }
+
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .promo-badge {
+      background-color: #95e392;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #0c0c0d;
+      font-family: 'Inter', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .promo-text {
+      font-size: 12px;
+      font-weight: 400;
+      color: #ececed;
+      font-family: 'Inter', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .promo-divider {
+      font-size: 13px;
+      color: #ececed;
+      font-family: 'Inter', sans-serif;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+
+    /* ── Nav Bar: sticky below iOS bar ── */
+    .nav-bar {
+      position: sticky;
+      top: 46px; /* height of .ios-bar */
+      z-index: 15;
+      background-color: #ffffff;
+    }
+
+    .nav-inner {
+      height: 56px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .nav-left,
+    .nav-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-left  { left: 24px; }
+    .nav-right { right: 24px; }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background-color: #0c0c10;
+      border-radius: 1px;
+    }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      color: #0c0c10;
+      flex-shrink: 0;
+    }
+
+    .nav-divider {
+      height: 1px;
+      background-color: #e5e5e5;
+    }
+
+    /* ── Bottom CTA bar: always visible ── */
+    .bottom-bar {
+      flex-shrink: 0;
+      background-color: #ffffff;
+      border-top: 1px solid #d0c5ae;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 24px;
+    }
+
+    .bottom-bar-copy {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .bottom-bar-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #0c0c0d;
+      line-height: 1.4;
+    }
+
+    .bottom-bar-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: #6e6e6e;
+      line-height: 1.4;
+    }
+
+    .bottom-bar-btn {
+      flex-shrink: 0;
+      background-color: #0c0c0d;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1;
+      height: 32px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 24px 64px;
+      background: linear-gradient(198.23deg, #342522 70.1%, #906f5c 99.3%);
+      border-radius: 0 0 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      isolation: isolate;
+    }
+
+    .hero-product-img {
+      position: absolute;
+      top: 273px;
+      left: 39px;
+      width: 315px;
+      height: 284px;
+      z-index: 1;
+      pointer-events: none;
+      object-fit: contain;
+    }
+
+    .hero-top {
+      position: relative;
+      z-index: 4;
+      padding-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #dededf;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 34px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.12;
+      letter-spacing: -0.68px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-title-accent {
+      background: linear-gradient(90deg, #f4dbc0 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-trustpilot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 0;
+    }
+
+    .hero-trustpilot-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .hero-spacer {
+      height: 189px;
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .hero-bottom {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .hero-tiles {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .hero-tile {
+      position: relative;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(50, 38, 32, 0.8);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      text-decoration: none;
+      overflow: hidden;
+    }
+
+    .hero-tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(199.46deg, rgba(255,255,255,0.12) 32.8%, rgba(255,255,255,0.03) 100%);
+      border-radius: 8px;
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+    }
+
+    .hero-tile-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.4;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tile-btn {
+      position: relative;
+      z-index: 1;
+      width: 32px;
+      height: 32px;
+      background: #ffffff;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Ticker */
+    .hero-ticker-wrap {
+      width: calc(100% + 48px);
+      margin-left: -24px;
+      position: relative;
+      height: 32px;
+    }
+
+    .hero-ticker-track {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      /* no overflow here — hero's overflow:hidden clips the scrolling text */
+    }
+
+    .hero-ticker {
+      display: flex;
+      align-items: center;
+      gap: 21px;
+      white-space: nowrap;
+      padding-left: 24px;
+      animation: ticker 18s linear infinite;
+    }
+
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .ticker-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background-color: #c7f1c5;
+      flex-shrink: 0;
+    }
+
+    .ticker-text {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      font-weight: 400;
+      color: #f9f9fa;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.4;
+    }
+
+    .ticker-play-btn {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(3.4px);
+      -webkit-backdrop-filter: blur(3.4px);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Section spacing ── */
+    .section + .section { margin-top: 8px; }
+
+    /* ── CTA / Why Huel section ── */
+    .section-cta {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 60px 24px;
+      background: linear-gradient(199.95deg, #040308 70.1%, #333333 99.3%);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      isolation: isolate;
+    }
+
+    .cta-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 671.5px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .cta-bg-spacer {
+      height: 82px;
+      background: #f2f9f7;
+    }
+
+    .cta-bg-photo-wrap {
+      position: relative;
+      height: 589.5px;
+      overflow: hidden;
+    }
+
+    .cta-bg-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cta-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #040308 1.172%, rgba(4, 3, 8, 0) 68.178%);
+    }
+
+    .cta-header {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .cta-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6e6e6e;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+    }
+
+    .cta-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 30px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.12;
+      letter-spacing: -0.6px;
+      text-align: center;
+    }
+
+    .cta-title-accent {
+      background: linear-gradient(90deg, #75684d 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-spacer {
+      height: 270px;
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .cta-impact-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 19px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.12;
+      letter-spacing: -0.42px;
+      text-align: center;
+      width: 100%;
+      padding-bottom: 8px;
+      position: relative;
+      z-index: 4;
+    }
+
+    .cta-footnote {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 400;
+      color: #cbcbcc;
+      line-height: 1.4;
+      mix-blend-mode: plus-lighter;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-stats {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .cta-stats-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0px 12px 24px -4px rgba(75,75,75,0.08), 0px 2px 2px 0px rgba(75,75,75,0.02);
+      background-image:
+        linear-gradient(241.8deg, rgba(255,255,255,0.12) 32.788%, rgba(255,255,255,0.24) 100%),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.1) 100%);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .cta-stats-row .stat-card { flex: 1; }
+
+    .stat-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 38px;
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -0.76px;
+      background: linear-gradient(90deg, #f4dbc0 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.4;
+      mix-blend-mode: plus-lighter;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── When To Use It section ── */
+    .section-wtu {
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      background: #ffffff;
+    }
+
+    .wtu-header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      align-items: center;
+    }
+
+    .wtu-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6e6e6e;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+    }
+
+    .wtu-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 34px;
+      font-weight: 500;
+      color: #0c0c0d;
+      line-height: 1.12;
+      letter-spacing: -0.68px;
+      text-align: center;
+    }
+
+    .wtu-title-accent {
+      background: linear-gradient(90deg, #75684d 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .wtu-carousel-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .wtu-track {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 24px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin-left: -24px;
+      margin-right: -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .wtu-track::-webkit-scrollbar { display: none; }
+
+    .wtu-card {
+      width: 272px;
+      flex-shrink: 0;
+      background: #f5f2ec;
+      border-radius: 12px;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    .wtu-card-img {
+      width: 100%;
+      height: 204px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .wtu-card-body {
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .wtu-card-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #386641;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+    }
+
+    .wtu-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .wtu-card-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #0c0c0d;
+      line-height: 1.4;
+    }
+
+    .wtu-card-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #2d2d2e;
+      line-height: 1.4;
+    }
+
+    .wtu-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .wtu-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wtu-dot {
+      height: 8px;
+      border-radius: 999px;
+      background: #d0c5ae;
+      width: 8px;
+      transition: width 0.25s ease, background 0.25s ease;
+    }
+
+    .wtu-dot.active {
+      width: 20px;
+      background: #0c0c0d;
+    }
+
+    .wtu-nav {
+      display: flex;
+      gap: 16px;
+    }
+
+    .wtu-nav-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1.25px solid #0c0c0d;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .wtu-nav-btn:disabled {
+      border-color: #d0c5ae;
+      cursor: default;
+    }
+
+    .wtu-nav-btn:disabled svg { stroke: #d0c5ae; }
+
+    /* ── How It Works section ── */
+    .section-hiw {
+      background: #f5f2ec;
+      border-radius: 24px;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hiw-header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hiw-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6e6e6e;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+    }
+
+    .hiw-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 34px;
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: -0.68px;
+      text-align: center;
+    }
+
+    .hiw-title-dark   { color: #0c0c0d; }
+
+    .hiw-title-accent {
+      background: linear-gradient(90deg, #75684d 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hiw-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .hiw-step {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .hiw-step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: #0c0c0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #ffffff;
+      letter-spacing: 0.96px;
+    }
+
+    .hiw-step-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .hiw-step-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #0c0c0d;
+      line-height: 1.4;
+    }
+
+    .hiw-step-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #6e6e6e;
+      line-height: 1.4;
+    }
+
+    /* ── Product Selection section ── */
+    .section-products {
+      background: #ffffff;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .prod-header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .prod-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6e6e6e;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+    }
+
+    .prod-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 34px;
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: -0.68px;
+    }
+
+    .prod-title-dark   { color: #0c0c0d; }
+    .prod-title-accent {
+      background: linear-gradient(90deg, #75684d 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Filter pills */
+    .prod-filters {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      margin-left: -24px;
+      margin-right: -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .prod-filters::-webkit-scrollbar { display: none; }
+
+    .prod-filter-btn {
+      height: 28px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background: #f5f2ec;
+      color: #0c0c0d;
+    }
+
+    .prod-filter-btn.active {
+      background: #0c0c0d;
+      color: #ffffff;
+    }
+
+    /* Grid */
+    .prod-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .prod-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .prod-card {
+      flex: 1;
+      min-width: 0;
+      border-radius: 12px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 0 16px;
+      background: linear-gradient(151.29deg, #f5f2ec 58.796%, #d0c5ae 138.06%);
+    }
+
+    .prod-card-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 168.5 / 112;
+      flex-shrink: 0;
+    }
+
+    .prod-card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .prod-card-info {
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .prod-card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .prod-card-type {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: #6e6e6e;
+      line-height: 1.4;
+    }
+
+    .prod-card-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #0c0c0d;
+      line-height: 1.4;
+    }
+
+    .prod-card-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: #6e6e6e;
+      line-height: 1.4;
+    }
+
+    .prod-card-tag {
+      position: absolute;
+      top: -11.5px;
+      left: 12px;
+      background: #e1f8e0;
+      border: 1px solid #ffffff;
+      border-radius: 999px;
+      padding: 6px 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: #386641;
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+
+    /* Promo banner */
+    .prod-promo {
+      background: #0c0c0d;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .prod-promo-img {
+      width: 81px;
+      flex-shrink: 0;
+      position: relative;
+      background: #4b4b4b;
+    }
+
+    .prod-promo-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .prod-promo-body {
+      flex: 1;
+      padding: 16px 16px 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .prod-promo-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #c7f1c5;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .prod-promo-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .prod-promo-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    /* ── Testimonials section ── */
+    .section-testimonials {
+      background: #f5f2ec;
+      border-radius: 24px;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .test-header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      text-align: center;
+      align-items: center;
+    }
+
+    .test-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6e6e6e;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+    }
+
+    .test-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 34px;
+      font-weight: 500;
+      color: #0c0c0d;
+      line-height: 1.12;
+      letter-spacing: -0.68px;
+      text-align: center;
+    }
+
+    .test-title-accent {
+      background: linear-gradient(90deg, #75684d 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .test-body {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+    }
+
+    /* Avatar nav row */
+    .test-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .test-arrow {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .test-avatars {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .test-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      padding: 2.857px;
+      border: 0.714px solid transparent;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: opacity 0.2s, border-color 0.2s;
+    }
+
+    .test-avatar.active {
+      border-color: #0c0c0d;
+      opacity: 1;
+    }
+
+    .test-avatar:not(.active) { opacity: 0.4; }
+
+    .test-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Card track */
+    .test-track-wrap {
+      width: calc(100% + 48px);
+      margin-left: -24px;
+      overflow: hidden;
+    }
+
+    .test-track {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 24px;
+      scrollbar-width: none;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .test-track::-webkit-scrollbar { display: none; }
+
+    .test-card {
+      width: 345px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .test-card-photo {
+      height: 194px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .test-card-photo img {
+      position: absolute;
+      width: 100%;
+      height: 266.75%;
+      top: -68.51%;
+      left: 0;
+      object-fit: cover;
+    }
+
+    .test-card-content {
+      border-radius: 12px;
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(160.21deg, #ffffff 37.876%, #d0c5ae 125.42%);
+      overflow: hidden;
+    }
+
+    .test-card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .test-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .test-stat-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 56px;
+      font-weight: 500;
+      color: #0c0c0d;
+      line-height: 1.12;
+      letter-spacing: -1.12px;
+    }
+
+    .test-stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #0c0c0d;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+    }
+
+    .test-quote {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #2d2d2e;
+      line-height: 1.4;
+    }
+
+    .test-card-spacer {
+      flex: 1;
+      min-height: 48px;
+    }
+
+    .test-attribution {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #4b4b4b;
+      line-height: 1.4;
+    }
+
+    /* Trustpilot widget */
+    .test-trustpilot {
+      width: 147px;
+      height: 102px;
+      position: relative;
+      overflow: hidden;
+      background: #f5f2ec;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .test-trustpilot img {
+      position: absolute;
+      width: 216px;
+      height: 134px;
+      left: -32px;
+      top: -13px;
+      object-fit: cover;
+    }
+
+    /* ── 30-day guarantee section ── */
+    .section-guarantee {
+      padding: 40px 24px 0;
+    }
+
+    .guarantee-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 100%;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .guarantee-card-bg {
+      position: absolute;
+      inset: 0;
+      background: #ececed;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .guarantee-card-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .guarantee-glass {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 32px;
+      background: linear-gradient(96.06deg, rgba(12,12,13,0.12) 0%, rgba(12,12,13,0.192) 100%);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      text-align: center;
+      gap: 24px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .guarantee-badge {
+      width: 80px;
+      height: 80px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(12,12,13,0.24) 0.625%, rgba(12,12,13,0.64) 100.62%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .guarantee-badge-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 30.4px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.12;
+      letter-spacing: -0.608px;
+    }
+
+    .guarantee-badge-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.6px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .guarantee-text {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .guarantee-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: -0.48px;
+      color: #ffffff;
+    }
+
+    .guarantee-heading-accent {
+      background: linear-gradient(90deg, #f4dbc0 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .guarantee-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .guarantee-btn {
+      width: 100%;
+      height: 40px;
+      background: #ffffff;
+      color: #0c0c0d;
+      border: none;
+      border-radius: 999px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ── FAQ section ── */
+    .section-faq {
+      background: #ffffff;
+      padding: 40px 24px;
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .faq-header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      text-align: center;
+      align-items: center;
+    }
+
+    .faq-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6e6e6e;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+    }
+
+    .faq-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 34px;
+      font-weight: 500;
+      color: #0c0c0d;
+      line-height: 1.12;
+      letter-spacing: -0.68px;
+    }
+
+    .faq-title-accent {
+      background: linear-gradient(90deg, #75684d 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .faq-item {
+      background: #f5f2ec;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px;
+      cursor: pointer;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+    }
+
+    .faq-question-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #0c0c0d;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #6e6e6e;
+      line-height: 1.4;
+      padding: 0 16px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 16px 16px;
+    }
+
+    /* ── Footer ── */
+    .footer-signup {
+      background: #0c0c0d;
+      padding: 48px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-signup-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 30px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .footer-signup-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      font-weight: 450;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .footer-signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-input-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .footer-input-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-input-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .footer-input {
+      background: #ffffff;
+      border: 1px solid #6e6e6e;
+      border-radius: 8px;
+      height: 40px;
+      padding: 0 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: #6e6e6e;
+      width: 100%;
+    }
+
+    .footer-signup-btn {
+      height: 40px;
+      padding: 0 24px;
+      border-radius: 999px;
+      border: 1.25px solid #ffffff;
+      background: transparent;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.15px;
+    }
+
+    .footer-legal {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #a5a5a6;
+      line-height: 1.4;
+    }
+
+    .footer-legal a {
+      color: #a5a5a6;
+      text-decoration: underline;
+    }
+
+    /* Footer body */
+    .footer-body {
+      background: #0c0c0d;
+      position: relative;
+      padding: 64px 24px 40px;
+      overflow: hidden;
+    }
+
+    .footer-body-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .footer-body-bg-img {
+      position: absolute;
+      width: 338.75%;
+      height: 54.42%;
+      left: -130.3%;
+      top: -12.31%;
+      object-fit: cover;
+      opacity: 0.4;
+    }
+
+    .footer-body-bg-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180.39deg, rgba(12,12,16,0) 10.469%, rgb(12,12,16) 19.585%);
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* B Corp + planet copy */
+    .footer-planet {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .footer-bcorp {
+      width: 66px;
+      height: 96px;
+      object-fit: cover;
+    }
+
+    .footer-planet-text {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-planet-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 30px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .footer-planet-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .footer-planet-btn {
+      height: 40px;
+      padding: 0 24px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: none;
+      color: #0c0c0d;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      letter-spacing: 0.15px;
+      align-self: flex-start;
+    }
+
+    /* Nav accordions */
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .footer-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .footer-nav-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .footer-nav-chevron {
+      color: #ffffff;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .footer-nav-item.open .footer-nav-chevron {
+      transform: rotate(180deg);
+    }
+
+    .footer-nav-links {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 0;
+    }
+
+    .footer-nav-item.open .footer-nav-links {
+      max-height: 300px;
+    }
+
+    .footer-nav-link {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #a5a5a6;
+      line-height: 1.4;
+      padding: 8px 0 0;
+      text-decoration: none;
+    }
+
+    /* Location + copyright + payments */
+    .footer-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-location {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer-location-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .footer-copyright {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #a5a5a6;
+      line-height: 1.3;
+    }
+
+    .footer-payments {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 24px;
+    }
+
+    .footer-payment-icon {
+      width: 35px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    /* Divider */
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      width: 100%;
+    }
+
+    /* Logo + socials */
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .footer-logo {
+      height: 29px;
+      width: auto;
+      /* invert to white since our SVG is dark */
+      filter: invert(1);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .footer-social-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    /* Health claims */
+    .footer-claims {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #a5a5a6;
+      line-height: 1.4;
+    }
+
+    .footer-claims p {
+      margin-bottom: 0;
+    }
+
+    .footer-claims p + p {
+      margin-top: 12px;
+    }
+
+    /* ── Page content ── */
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 24px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Homepage 2026</h1>
-  <p>Design preview coming soon.</p>
+  <div class="mobile-container">
+  <div class="mobile-scroll">
+
+    <!-- iOS Status Bar: always sticky -->
+    <div class="ios-bar">
+      <span class="ios-time">9:41</span>
+      <div class="ios-status-icons">
+        <!-- Signal -->
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0"   y="6"   width="3" height="5"  rx="0.5" fill="white"/>
+          <rect x="4.5" y="3.5" width="3" height="7.5" rx="0.5" fill="white"/>
+          <rect x="9"   y="1"   width="3" height="10" rx="0.5" fill="white"/>
+          <rect x="13.5" y="0"  width="3" height="11" rx="0.5" fill="white" fill-opacity="0.3"/>
+        </svg>
+        <!-- Wi-Fi -->
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="11" r="1.2" fill="white"/>
+          <path d="M4.5 7.8C5.5 6.7 6.7 6 8 6s2.5.7 3.5 1.8" stroke="white" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+          <path d="M1.5 4.8C3.2 2.7 5.5 1.5 8 1.5s4.8 1.2 6.5 3.3" stroke="white" stroke-width="1.4" stroke-linecap="round" fill="none" stroke-opacity="0.4"/>
+        </svg>
+        <!-- Battery -->
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity="0.35"/>
+          <rect x="2"   y="2"   width="17" height="8" rx="2" fill="white"/>
+          <path d="M23 4v4c.8-.3 1.5-1.1 1.5-2S23.8 4.3 23 4z" fill="white" fill-opacity="0.4"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Promo Bar: scrolls away -->
+    <div class="promo-bar">
+      <div class="promo-track">
+        <!-- Set A -->
+        <span class="promo-badge">$15 off</span>
+        <span class="promo-text">your first order over $75</span>
+        <span class="promo-divider">|</span>
+        <span class="promo-text">Free t-shirt worth $40 · first order</span>
+        <span class="promo-divider">|</span>
+        <span class="promo-text">30-day money-back guarantee</span>
+        <span class="promo-divider">|</span>
+        <!-- Set B (duplicate for seamless loop) -->
+        <span class="promo-badge">$15 off</span>
+        <span class="promo-text">your first order over $75</span>
+        <span class="promo-divider">|</span>
+        <span class="promo-text">Free t-shirt worth $40 · first order</span>
+        <span class="promo-divider">|</span>
+        <span class="promo-text">30-day money-back guarantee</span>
+        <span class="promo-divider">|</span>
+      </div>
+    </div>
+
+    <!-- Nav Bar: sticky below iOS bar -->
+    <div class="nav-bar">
+      <div class="nav-inner">
+
+        <div class="nav-left">
+          <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <!-- Huel wordmark -->
+        <img class="nav-logo" src="images/logo.svg" alt="Huel" width="71" height="22">
+
+        <div class="nav-right">
+          <!-- User icon -->
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-3.87 3.58-7 8-7s8 3.13 8 7"/>
+          </svg>
+          <!-- Shopping bag icon -->
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </div>
+
+      </div>
+      <div class="nav-divider"></div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero section">
+
+      <!-- Product image (sits behind tiles, above background) -->
+      <img class="hero-product-img"
+           src="https://www.figma.com/api/mcp/asset/2e4a3838-1acc-4c81-9724-e6610e406e56"
+           alt="Huel products">
+
+      <!-- Eyebrow + title + Trustpilot -->
+      <div class="hero-top">
+        <p class="hero-eyebrow">Nutritionally complete food</p>
+        <h1 class="hero-title">Food that gives you all the nutrients you need <span class="hero-title-accent">to thrive.</span></h1>
+        <div class="hero-trustpilot">
+          <img src="https://www.figma.com/api/mcp/asset/15e91058-b3a0-457b-9a70-2bc276f3387f"
+               alt="4.3 stars on Trustpilot" width="112" height="21">
+          <p class="hero-trustpilot-text">4.3 stars from 27k reviews</p>
+        </div>
+      </div>
+
+      <!-- Spacer: creates room for product image -->
+      <div class="hero-spacer"></div>
+
+      <!-- Category tiles + info ticker -->
+      <div class="hero-bottom">
+
+        <div class="hero-tiles">
+          <a class="hero-tile" href="#">
+            <span class="hero-tile-label">Manage Weight</span>
+            <div class="hero-tile-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </a>
+          <a class="hero-tile" href="#">
+            <span class="hero-tile-label">High Protein</span>
+            <div class="hero-tile-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </a>
+          <a class="hero-tile" href="#">
+            <span class="hero-tile-label">Healthy Habits</span>
+            <div class="hero-tile-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </a>
+          <a class="hero-tile" href="#">
+            <span class="hero-tile-label">On-the-go</span>
+            <div class="hero-tile-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+
+        <div class="hero-ticker-wrap">
+          <div class="hero-ticker-track">
+            <div class="hero-ticker">
+              <!-- Set A -->
+              <span class="ticker-item"><span class="ticker-dot"></span><span class="ticker-text">100% vegan</span></span>
+              <span class="ticker-item"><span class="ticker-dot"></span><span class="ticker-text">No GMO</span></span>
+              <span class="ticker-item"><span class="ticker-dot"></span><span class="ticker-text">Plant-based protein</span></span>
+              <!-- Set B (duplicate for seamless loop) -->
+              <span class="ticker-item"><span class="ticker-dot"></span><span class="ticker-text">100% vegan</span></span>
+              <span class="ticker-item"><span class="ticker-dot"></span><span class="ticker-text">No GMO</span></span>
+              <span class="ticker-item"><span class="ticker-dot"></span><span class="ticker-text">Plant-based protein</span></span>
+            </div>
+          </div>
+          <button class="ticker-play-btn" aria-label="Pause ticker">
+            <svg width="8" height="10" viewBox="0 0 8 10" fill="none">
+              <rect x="0.5" y="0.5" width="2.5" height="9" rx="1" fill="#0c0c0d"/>
+              <rect x="5"   y="0.5" width="2.5" height="9" rx="1" fill="#0c0c0d"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Why Huel / CTA section -->
+    <section class="section section-cta">
+
+      <!-- Background: light spacer + lifestyle photo + dark overlay -->
+      <div class="cta-bg">
+        <div class="cta-bg-spacer"></div>
+        <div class="cta-bg-photo-wrap">
+          <img class="cta-bg-photo"
+               src="https://www.figma.com/api/mcp/asset/4255d619-7490-4f57-97b1-ab25c4d810d2"
+               alt="">
+          <div class="cta-bg-overlay"></div>
+        </div>
+      </div>
+
+      <!-- Eyebrow + title -->
+      <div class="cta-header">
+        <p class="cta-eyebrow">Why Huel?</p>
+        <h2 class="cta-title"><span style="-webkit-text-fill-color:#0c0c0d;color:#0c0c0d">You know what good nutrition looks like.</span><br><span class="cta-title-accent">Life just gets in the way.</span></h2>
+      </div>
+
+      <!-- Spacer: room for the lifestyle photo -->
+      <div class="cta-spacer"></div>
+
+      <!-- Impact heading -->
+      <p class="cta-impact-heading">The impact of Huel after 60 days</p>
+
+      <!-- Stat cards -->
+      <div class="cta-stats">
+        <div class="cta-stats-row">
+          <div class="stat-card">
+            <p class="stat-number">86%</p>
+            <p class="stat-desc">Felt noticeably more energised in the day</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number">78%</p>
+            <p class="stat-desc">Felt a positive impact on their health</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <p class="stat-number">92%</p>
+          <p class="stat-desc">Saw an improvement in their mood and their ability to concentrate on demanding tasks</p>
+        </div>
+      </div>
+
+      <!-- Footnote -->
+      <p class="cta-footnote">*Based on a survey of 1,200 Huel customers after 60 days.</p>
+
+    </section>
+
+    <!-- When To Use It -->
+    <section class="section section-wtu">
+
+      <div class="wtu-header">
+        <p class="wtu-eyebrow">When to use it</p>
+        <h2 class="wtu-title">Complete nutrition, <span class="wtu-title-accent">Built for real life.</span></h2>
+      </div>
+
+      <div class="wtu-carousel-wrap">
+        <div class="wtu-track" id="wtuTrack">
+
+          <div class="wtu-card">
+            <img class="wtu-card-img" src="images/wtu-slide-1.png" alt="Morning">
+            <div class="wtu-card-body">
+              <p class="wtu-card-eyebrow">Morning</p>
+              <div class="wtu-card-content">
+                <p class="wtu-card-title">No time for breakfast</p>
+                <p class="wtu-card-text">Grab an RTD. Out the door. 400kcal. 34g protein. Done.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wtu-card">
+            <img class="wtu-card-img" src="images/wtu-slide-2.png" alt="Afternoon">
+            <div class="wtu-card-body">
+              <p class="wtu-card-eyebrow">Afternoon</p>
+              <div class="wtu-card-content">
+                <p class="wtu-card-title">No lunch break</p>
+                <p class="wtu-card-text">Shake at your desk, drink, and back in five.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wtu-card">
+            <img class="wtu-card-img" src="images/wtu-slide-3.png" alt="Evening">
+            <div class="wtu-card-body">
+              <p class="wtu-card-eyebrow">Evening</p>
+              <div class="wtu-card-content">
+                <p class="wtu-card-title">Too tired to cook</p>
+                <p class="wtu-card-text">Hot &amp; Savoury in 5 minutes. A proper meal, not a compromise.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wtu-card">
+            <img class="wtu-card-img" src="images/wtu-slide-4.png" alt="Always">
+            <div class="wtu-card-body">
+              <p class="wtu-card-eyebrow">Always</p>
+              <div class="wtu-card-content">
+                <p class="wtu-card-title">Every bite has to count</p>
+                <p class="wtu-card-text">27 vitamins and minerals. Every meal. Without thinking about it.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="wtu-controls">
+          <div class="wtu-dots" id="wtuDots">
+            <span class="wtu-dot active"></span>
+            <span class="wtu-dot"></span>
+            <span class="wtu-dot"></span>
+            <span class="wtu-dot"></span>
+          </div>
+          <div class="wtu-nav">
+            <button class="wtu-nav-btn" id="wtuPrev" aria-label="Previous" disabled>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12.5 15l-5-5 5-5"/>
+              </svg>
+            </button>
+            <button class="wtu-nav-btn" id="wtuNext" aria-label="Next">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7.5 5l5 5-5 5"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- How It Works -->
+    <section class="section section-hiw">
+
+      <div class="hiw-header">
+        <p class="hiw-eyebrow">How it works</p>
+        <div class="hiw-title">
+          <p class="hiw-title-dark">Three steps.</p>
+          <p class="hiw-title-accent">That's it.</p>
+        </div>
+      </div>
+
+      <div class="hiw-steps">
+
+        <div class="hiw-step">
+          <div class="hiw-step-num">1</div>
+          <div class="hiw-step-body">
+            <p class="hiw-step-title">Pick your format</p>
+            <p class="hiw-step-text">Powder, RTD, bars, Hot &amp; Savoury, or Daily Greens. All nutritionally complete.</p>
+          </div>
+        </div>
+
+        <div class="hiw-step">
+          <div class="hiw-step-num">2</div>
+          <div class="hiw-step-body">
+            <p class="hiw-step-title">Prepare in seconds</p>
+            <p class="hiw-step-text">Scoop and shake. Hot water and eat. Twist and drink. No cooking.</p>
+          </div>
+        </div>
+
+        <div class="hiw-step">
+          <div class="hiw-step-num">3</div>
+          <div class="hiw-step-body">
+            <p class="hiw-step-title">Eat. Every gap closed.</p>
+            <p class="hiw-step-text">27 vitamins and minerals. High protein. High fibre. Balanced nutrition.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Product Selection -->
+    <section class="section section-products">
+
+      <div class="prod-header">
+        <p class="prod-eyebrow">Pick your format</p>
+        <div class="prod-title">
+          <p class="prod-title-dark">Find the right Huel</p>
+          <p class="prod-title-accent">for your day.</p>
+        </div>
+      </div>
+
+      <div class="prod-content" style="display:flex;flex-direction:column;gap:32px;width:100%;">
+
+        <!-- Filter pills -->
+        <div class="prod-filters">
+          <button class="prod-filter-btn active">Bestsellers</button>
+          <button class="prod-filter-btn">Powder meals</button>
+          <button class="prod-filter-btn">Ready-to-drink</button>
+          <button class="prod-filter-btn">Hot meals</button>
+          <button class="prod-filter-btn">Drinks &amp; Snacks</button>
+          <button class="prod-filter-btn">Greens &amp; Superfoods</button>
+        </div>
+
+        <!-- Product grid -->
+        <div class="prod-grid">
+
+          <div class="prod-row">
+            <div class="prod-card">
+              <span class="prod-card-tag">Most popular</span>
+              <div class="prod-card-img-wrap">
+                <img class="prod-card-img"
+                     src="images/bs-be.png"
+                     alt="Black Edition Powder">
+              </div>
+              <div class="prod-card-info">
+                <div class="prod-card-meta">
+                  <p class="prod-card-type">High-protein meal</p>
+                  <p class="prod-card-name">Black Edition Powder</p>
+                </div>
+                <p class="prod-card-price">From £1.50/meal</p>
+              </div>
+            </div>
+
+            <div class="prod-card">
+              <div class="prod-card-img-wrap">
+                <img class="prod-card-img"
+                     src="images/bs-daz.png"
+                     alt="Daily A-Z Vitamins">
+              </div>
+              <div class="prod-card-info">
+                <div class="prod-card-meta">
+                  <p class="prod-card-type">Energy + Vitamins</p>
+                  <p class="prod-card-name">Daily A-Z<br>Vitamins</p>
+                </div>
+                <p class="prod-card-price">From £1.10/can</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod-row">
+            <div class="prod-card">
+              <div class="prod-card-img-wrap">
+                <img class="prod-card-img"
+                     src="images/bs-ramen.png"
+                     alt="Hot &amp; Savoury Ramen Lite">
+              </div>
+              <div class="prod-card-info">
+                <div class="prod-card-meta">
+                  <p class="prod-card-type">Low calorie meal</p>
+                  <p class="prod-card-name">Hot &amp; Savoury Ramen Lite</p>
+                </div>
+                <p class="prod-card-price">From £1.30/meal</p>
+              </div>
+            </div>
+
+            <div class="prod-card">
+              <div class="prod-card-img-wrap">
+                <img class="prod-card-img"
+                     src="images/bs-bertd.png"
+                     alt="Black Edition Ready-to-drink">
+              </div>
+              <div class="prod-card-info">
+                <div class="prod-card-meta">
+                  <p class="prod-card-type">High-protein meal</p>
+                  <p class="prod-card-name">Black Edition Ready-to-drink</p>
+                </div>
+                <p class="prod-card-price">From £3.50/meal</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Promo banner -->
+          <div class="prod-promo">
+            <div class="prod-promo-img">
+              <img src="https://www.figma.com/api/mcp/asset/151c275a-a6ba-4d4e-9258-515e9d4b384f" alt="Free t-shirt">
+            </div>
+            <div class="prod-promo-body">
+              <p class="prod-promo-eyebrow">First order gift</p>
+              <div>
+                <p class="prod-promo-title">Free t-shirt &amp; accessory</p>
+                <p class="prod-promo-text">Worth £40 when your first order is over £40.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section section-testimonials">
+
+      <div class="test-header">
+        <p class="test-eyebrow">Success stories</p>
+        <h2 class="test-title">Real people.<br><span class="test-title-accent">Real results.</span></h2>
+      </div>
+
+      <div class="test-body">
+
+        <!-- Avatar nav row -->
+        <div class="test-nav-row">
+          <button class="test-arrow" id="testPrev" aria-label="Previous">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 12l-4-4 4-4"/>
+            </svg>
+          </button>
+          <div class="test-avatars" id="testAvatars">
+            <div class="test-avatar active"><img src="https://www.figma.com/api/mcp/asset/2e98f022-e720-4d24-9405-a095bc30e638" alt="Samantha"></div>
+            <div class="test-avatar"><img src="https://www.figma.com/api/mcp/asset/2e98f022-e720-4d24-9405-a095bc30e638" alt="James"></div>
+            <div class="test-avatar"><img src="https://www.figma.com/api/mcp/asset/2e98f022-e720-4d24-9405-a095bc30e638" alt="Sarah"></div>
+            <div class="test-avatar"><img src="https://www.figma.com/api/mcp/asset/2e98f022-e720-4d24-9405-a095bc30e638" alt="Tom"></div>
+          </div>
+          <button class="test-arrow" id="testNext" aria-label="Next">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 4l4 4-4 4"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Card track -->
+        <div class="test-track-wrap">
+          <div class="test-track" id="testTrack">
+
+            <div class="test-card">
+              <div class="test-card-photo">
+                <img src="https://www.figma.com/api/mcp/asset/2e98f022-e720-4d24-9405-a095bc30e638" alt="Samantha">
+              </div>
+              <div class="test-card-content">
+                <div class="test-card-top">
+                  <div class="test-stat">
+                    <p class="test-stat-number">12kg</p>
+                    <p class="test-stat-label">Weight loss</p>
+                  </div>
+                  <p class="test-quote">"Huel helped me completely rethink my routine. Having quick, balanced meals made it so much easier to stay consistent, without feeling like I was constantly dieting."</p>
+                </div>
+                <div class="test-card-spacer"></div>
+                <p class="test-attribution">Samantha · Verified customer</p>
+              </div>
+            </div>
+
+            <div class="test-card">
+              <div class="test-card-photo">
+                <img src="https://www.figma.com/api/mcp/asset/2e98f022-e720-4d24-9405-a095bc30e638" alt="James">
+              </div>
+              <div class="test-card-content">
+                <div class="test-card-top">
+                  <div class="test-stat">
+                    <p class="test-stat-number">8kg</p>
+                    <p class="test-stat-label">Weight loss</p>
+                  </div>
+                  <p class="test-quote">"I never thought I'd be a meal-replacement person. But Huel just made sense. It fits around my schedule and I genuinely feel better for it."</p>
+                </div>
+                <div class="test-card-spacer"></div>
+                <p class="test-attribution">James · Verified customer</p>
+              </div>
+            </div>
+
+            <div class="test-card">
+              <div class="test-card-photo">
+                <img src="https://www.figma.com/api/mcp/asset/2e98f022-e720-4d24-9405-a095bc30e638" alt="Sarah">
+              </div>
+              <div class="test-card-content">
+                <div class="test-card-top">
+                  <div class="test-stat">
+                    <p class="test-stat-number">6mo</p>
+                    <p class="test-stat-label">Consistent streak</p>
+                  </div>
+                  <p class="test-quote">"Six months in and I haven't looked back. My energy levels are so much more stable and I don't spend my mornings panicking about what to eat."</p>
+                </div>
+                <div class="test-card-spacer"></div>
+                <p class="test-attribution">Sarah · Verified customer</p>
+              </div>
+            </div>
+
+            <div class="test-card">
+              <div class="test-card-photo">
+                <img src="https://www.figma.com/api/mcp/asset/2e98f022-e720-4d24-9405-a095bc30e638" alt="Tom">
+              </div>
+              <div class="test-card-content">
+                <div class="test-card-top">
+                  <div class="test-stat">
+                    <p class="test-stat-number">27</p>
+                    <p class="test-stat-label">Vitamins per meal</p>
+                  </div>
+                  <p class="test-quote">"As someone who travels constantly, Huel is the only thing keeping my nutrition on track. One less thing to think about — that's priceless."</p>
+                </div>
+                <div class="test-card-spacer"></div>
+                <p class="test-attribution">Tom · Verified customer</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Trustpilot -->
+      <div class="test-trustpilot">
+        <img src="https://www.figma.com/api/mcp/asset/e318ee4d-574b-4a50-acee-446814481549" alt="Trustpilot — Excellent, 4.3 stars from 96,307 reviews">
+      </div>
+
+    </section>
+
+    <!-- 30-day guarantee -->
+    <section class="section section-guarantee">
+      <div class="guarantee-card">
+
+        <!-- Background photo -->
+        <div class="guarantee-card-bg">
+          <img src="https://www.figma.com/api/mcp/asset/bd1ae49b-45f1-4d1b-96f0-cb94ea50b713" alt="">
+        </div>
+
+        <!-- Frosted glass content -->
+        <div class="guarantee-glass">
+
+          <div class="guarantee-badge">
+            <span class="guarantee-badge-number">30</span>
+            <span class="guarantee-badge-label">DAYS</span>
+          </div>
+
+          <div class="guarantee-text">
+            <p class="guarantee-heading">
+              TRY IT FOR 30 DAYS. <span class="guarantee-heading-accent">NOT RIGHT FOR YOU? FULL REFUND.</span>
+            </p>
+            <p class="guarantee-sub">No questions. No hassle. No risk.</p>
+          </div>
+
+          <button class="guarantee-btn">Shop now, risk-free</button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section-faq">
+
+      <div class="faq-header">
+        <p class="faq-eyebrow">Still on the fence?</p>
+        <h2 class="faq-title">Still not sure?<br><span class="faq-title-accent">We've got answers.</span></h2>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span class="faq-question-text">Huel isn't a protein shake, here's what it actually is</span>
+            <span class="faq-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">Huel is nutritionally complete food — every meal contains 27 essential vitamins and minerals, a balanced macro split, and enough fibre to keep you full. It's not a supplement; it's a proper meal in a convenient format.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span class="faq-question-text">It actually fills you up. Here's why.</span>
+            <span class="faq-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">Huel is high in protein and fibre — two nutrients proven to increase satiety. Most customers report feeling full for 3–4 hours after a Huel meal, the same as a conventional cooked meal.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span class="faq-question-text">The taste: what to actually expect.</span>
+            <span class="faq-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">Huel has a mild, slightly nutty flavour that pairs well with most taste preferences. RTDs come in a range of flavours and our powders are available in both flavoured and unflavoured versions so you can mix to your liking.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span class="faq-question-text">Can I replace all my meals with Huel?</span>
+            <span class="faq-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0c0c0d" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">You can, but you don't have to. Many customers use Huel to replace one or two meals a day — typically breakfast or lunch — while keeping a conventional dinner. There's no requirement to go all-in.</div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Page content -->
+    <div class="content"></div>
+
+    <!-- Footer: Sign Up -->
+    <footer>
+    <div class="footer-signup">
+      <div>
+        <p class="footer-signup-heading">Join the Huel family</p>
+        <p class="footer-signup-sub" style="margin-top:12px">Get the scoop on exclusive offers and product launches</p>
+      </div>
+      <div class="footer-signup-form">
+        <div class="footer-input-row">
+          <div class="footer-input-wrap">
+            <label class="footer-input-label">Your e-mail</label>
+            <input class="footer-input" type="email" placeholder="Your email address">
+          </div>
+          <button class="footer-signup-btn">Sign up</button>
+        </div>
+        <p class="footer-legal">This site is protected by reCAPTCHA and the Google <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> apply. You can unsubscribe at any time. <a href="#">Huel Privacy Policy</a></p>
+      </div>
+    </div>
+
+    <!-- Footer: Body -->
+    <div class="footer-body">
+
+      <!-- Background photo + gradient -->
+      <div class="footer-body-bg">
+        <img class="footer-body-bg-img" src="https://www.figma.com/api/mcp/asset/53338d7e-9fe2-4afc-bf82-92021df8fbe9" alt="">
+        <div class="footer-body-bg-gradient"></div>
+      </div>
+
+      <div class="footer-content">
+
+        <!-- B Corp + Planet copy -->
+        <div class="footer-planet">
+          <img class="footer-bcorp" src="https://www.figma.com/api/mcp/asset/7dc98f69-79e3-455e-b524-c1cd30947ed3" alt="Certified B Corporation">
+          <div class="footer-planet-text">
+            <p class="footer-planet-heading">Plant-based nutrition to help the planet thrive</p>
+            <p class="footer-planet-sub">All Huel products are 100% vegan, designed for low-carbon eating.</p>
+          </div>
+          <button class="footer-planet-btn">See our commitments</button>
+        </div>
+
+        <!-- Nav accordions -->
+        <div class="footer-nav" id="footerNav">
+
+          <div class="footer-nav-item">
+            <span class="footer-nav-label">Huel food</span>
+            <svg class="footer-nav-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+            <div class="footer-nav-links">
+              <a class="footer-nav-link" href="#">Complete Nutrition Powder</a>
+              <a class="footer-nav-link" href="#">Ready-to-drink</a>
+              <a class="footer-nav-link" href="#">Hot & Savoury</a>
+              <a class="footer-nav-link" href="#">Huel Bars</a>
+              <a class="footer-nav-link" href="#">Daily Greens</a>
+            </div>
+          </div>
+
+          <div class="footer-nav-item">
+            <span class="footer-nav-label">Help</span>
+            <svg class="footer-nav-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+            <div class="footer-nav-links">
+              <a class="footer-nav-link" href="#">FAQ</a>
+              <a class="footer-nav-link" href="#">Contact us</a>
+              <a class="footer-nav-link" href="#">Shipping & returns</a>
+              <a class="footer-nav-link" href="#">Subscriptions</a>
+            </div>
+          </div>
+
+          <div class="footer-nav-item">
+            <span class="footer-nav-label">Company</span>
+            <svg class="footer-nav-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+            <div class="footer-nav-links">
+              <a class="footer-nav-link" href="#">About Huel</a>
+              <a class="footer-nav-link" href="#">Sustainability</a>
+              <a class="footer-nav-link" href="#">Careers</a>
+              <a class="footer-nav-link" href="#">Press</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Location + copyright + payments -->
+        <div class="footer-meta">
+          <div class="footer-location">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 1.5C5.79 1.5 4 3.29 4 5.5c0 3.25 4 9 4 9s4-5.75 4-9c0-2.21-1.79-4-4-4z"/>
+              <circle cx="8" cy="5.5" r="1.5"/>
+            </svg>
+            <span class="footer-location-name">United Kingdom</span>
+          </div>
+          <p class="footer-copyright">© 2015 – 2024 Huel Limited. All rights reserved.</p>
+          <div class="footer-payments">
+            <img class="footer-payment-icon" src="https://www.figma.com/api/mcp/asset/6706d904-65d5-4aa5-9a8d-4e76b7ece7e3" alt="Visa">
+            <img class="footer-payment-icon" src="https://www.figma.com/api/mcp/asset/7efef3d7-2418-406b-b067-a8343e0d9b15" alt="Mastercard">
+            <img class="footer-payment-icon" src="https://www.figma.com/api/mcp/asset/816d7e82-990a-4fca-b2f0-6db05ce6ea76" alt="Apple Pay">
+            <img class="footer-payment-icon" src="https://www.figma.com/api/mcp/asset/af855d22-2afa-4e7b-8f66-7e4017b77805" alt="Amex">
+            <img class="footer-payment-icon" src="https://www.figma.com/api/mcp/asset/cc5eac0b-c627-4d4f-9ba3-21c88fc4e1da" alt="PayPal">
+          </div>
+        </div>
+
+        <!-- Divider + Logo + Socials -->
+        <div style="display:flex;flex-direction:column;gap:32px;width:100%">
+          <div class="footer-divider"></div>
+          <div class="footer-brand">
+            <img class="footer-logo" src="images/logo.svg" alt="Huel" width="84">
+            <div class="footer-socials">
+              <img class="footer-social-icon" src="https://www.figma.com/api/mcp/asset/bf91aa02-2965-4794-9de8-a9625496d0ec" alt="Instagram">
+              <img class="footer-social-icon" src="https://www.figma.com/api/mcp/asset/5c953f98-9f5f-41f7-8ffb-9af810da2b66" alt="TikTok">
+              <img class="footer-social-icon" src="https://www.figma.com/api/mcp/asset/9d29053a-cb30-423e-829f-68bd91d52308" alt="LinkedIn">
+              <img class="footer-social-icon" src="https://www.figma.com/api/mcp/asset/af9e3099-8805-4e98-a4a3-cdb966f75b76" alt="YouTube">
+              <img class="footer-social-icon" src="https://www.figma.com/api/mcp/asset/f05b9c2c-3bcf-45e6-9daa-32fd11e8102b" alt="Facebook">
+              <img class="footer-social-icon" src="https://www.figma.com/api/mcp/asset/33ae2e73-cac6-400b-87c9-6878e5b9668a" alt="Twitter / X">
+            </div>
+          </div>
+          <div class="footer-divider"></div>
+        </div>
+
+        <!-- Health claims -->
+        <div class="footer-claims">
+          <p>Details on health claims:</p>
+          <p>Huel meals and bars provide the right amount of protein, essential fats, carbohydrates, fibre, vitamins &amp; minerals as part of a balanced diet</p>
+          <p>Energy — Source of biotin to contribute to normal energy-yielding metabolism</p>
+          <p>Digestion — Source of calcium to contribute to the normal function of digestive enzymes</p>
+          <p>Immune system — Source of vitamin C to contribute to the normal function of the immune system</p>
+          <p>Skin health — Source of zinc to contribute to the maintenance of normal skin</p>
+          <p>Cognitive function — Source of iron to contribute to normal cognitive function</p>
+          <p>Muscle function — Source of magnesium to contribute to normal muscle function</p>
+        </div>
+
+      </div>
+    </div>
+    </footer>
+
+  </div><!-- /.mobile-scroll -->
+
+  <!-- Bottom CTA bar: always visible -->
+  <div class="bottom-bar">
+    <div class="bottom-bar-copy">
+      <p class="bottom-bar-price">From £1.50 per meal</p>
+      <p class="bottom-bar-sub">Free gift on first order</p>
+    </div>
+    <button class="bottom-bar-btn">Shop now</button>
+  </div>
+
+  </div><!-- /.mobile-container -->
+  <script>
+    // Testimonial carousel
+    (function () {
+      const track   = document.getElementById('testTrack');
+      const avatars = Array.from(document.querySelectorAll('#testAvatars .test-avatar'));
+      const prev    = document.getElementById('testPrev');
+      const next    = document.getElementById('testNext');
+      const cards   = Array.from(track.children);
+      const total   = cards.length;
+      let current   = 0;
+      let programmatic = false;
+      let timer;
+
+      function updateUI(index) {
+        current = index;
+        avatars.forEach((a, i) => a.classList.toggle('active', i === current));
+        prev.style.opacity = current === 0 ? '0.4' : '1';
+        next.style.opacity = current === total - 1 ? '0.4' : '1';
+      }
+
+      function goTo(index) {
+        index = Math.max(0, Math.min(index, total - 1));
+        programmatic = true;
+        track.scrollTo({ left: cards[index].offsetLeft - 24, behavior: 'smooth' });
+        updateUI(index);
+        clearTimeout(timer);
+        timer = setTimeout(() => { programmatic = false; }, 600);
+      }
+
+      prev.addEventListener('click', () => goTo(current - 1));
+      next.addEventListener('click', () => goTo(current + 1));
+      avatars.forEach((a, i) => a.addEventListener('click', () => goTo(i)));
+
+      track.addEventListener('scroll', () => {
+        if (programmatic) return;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          let closest = 0, minDist = Infinity;
+          cards.forEach((c, i) => {
+            const dist = Math.abs((c.offsetLeft - 24) - track.scrollLeft);
+            if (dist < minDist) { minDist = dist; closest = i; }
+          });
+          updateUI(closest);
+        }, 80);
+      }, { passive: true });
+
+      updateUI(0);
+    })();
+  </script>
+
+  <script>
+    // Footer nav accordions
+    document.querySelectorAll('#footerNav .footer-nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('#footerNav .footer-nav-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+  <script>
+    // Filter pill tabs
+    document.querySelectorAll('.prod-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.prod-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+
+  <script>
+    // WTU carousel
+    (function () {
+      const track  = document.getElementById('wtuTrack');
+      const dots   = Array.from(document.querySelectorAll('#wtuDots .wtu-dot'));
+      const prev   = document.getElementById('wtuPrev');
+      const next   = document.getElementById('wtuNext');
+      const cards  = Array.from(track.children);
+      const total  = cards.length;
+      let current  = 0;
+      let programmatic = false;
+      let scrollTimer;
+
+      function updateUI(index) {
+        current = index;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        prev.disabled = current === 0;
+        next.disabled = current === total - 1;
+      }
+
+      function goTo(index) {
+        index = Math.max(0, Math.min(index, total - 1));
+        programmatic = true;
+        track.scrollTo({ left: cards[index].offsetLeft - 24, behavior: 'smooth' });
+        updateUI(index);
+        // release flag after animation settles
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => { programmatic = false; }, 600);
+      }
+
+      prev.addEventListener('click', () => goTo(current - 1));
+      next.addEventListener('click', () => goTo(current + 1));
+
+      // sync dots when user swipes manually
+      track.addEventListener('scroll', () => {
+        if (programmatic) return;
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          let closest = 0, minDist = Infinity;
+          cards.forEach((card, i) => {
+            const dist = Math.abs((card.offsetLeft - 24) - track.scrollLeft);
+            if (dist < minDist) { minDist = dist; closest = i; }
+          });
+          updateUI(closest);
+        }, 80);
+      }, { passive: true });
+
+      updateUI(0);
+    })();
+  </script>
 </body>
 </html>
