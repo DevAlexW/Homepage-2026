@@ -1386,6 +1386,193 @@
       object-fit: cover;
     }
 
+    /* ── Trusted by section ── */
+    .section-trusted {
+      background: radial-gradient(ellipse 130% 110% at -20% -30%, #e1f8e0 0%, #a3cea4 25%, #5c8962 50%, #386641 63%, #234029 80%, #0e1a11 100%);
+      border-radius: 24px;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      overflow: hidden;
+    }
+
+    .trusted-header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .trusted-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #f5f2ec;
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+      line-height: 1;
+    }
+
+    .trusted-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 34px;
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: -0.68px;
+    }
+
+    .trusted-title-dark { color: #ffffff; }
+
+    .trusted-title-accent {
+      background: linear-gradient(90deg, #f4dbc0 0%, #dbc390 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .trusted-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .trusted-carousel-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .trusted-track {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 24px;
+      scrollbar-width: none;
+      margin-left: -24px;
+      margin-right: -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .trusted-track::-webkit-scrollbar { display: none; }
+
+    .trusted-card {
+      width: 286px;
+      height: 508px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .trusted-card-bg {
+      position: absolute;
+      inset: 0;
+      background: #f5f2ec;
+    }
+
+    .trusted-card-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .trusted-card-fade {
+      position: relative;
+      height: 57px;
+      background: linear-gradient(to bottom, rgba(64,121,75,0) 0%, rgba(64,121,75,0.88) 100%);
+      flex-shrink: 0;
+    }
+
+    .trusted-card-footer {
+      position: relative;
+      background: linear-gradient(to bottom, rgba(64,121,75,0.88) 0%, rgba(29,53,34,0.88) 100%);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding: 0 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .trusted-card-author {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .trusted-card-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .trusted-badge {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .trusted-card-quote {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .trusted-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .trusted-stars {
+      height: 12px;
+      width: auto;
+    }
+
+    .trusted-nav {
+      display: flex;
+      gap: 16px;
+    }
+
+    .trusted-nav-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1.25px solid #ffffff;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .trusted-nav-btn:disabled {
+      border-color: rgba(255,255,255,0.3);
+      cursor: default;
+    }
+
+    .trusted-nav-btn:disabled svg { stroke: rgba(255,255,255,0.3); }
+
     /* ── 30-day guarantee section ── */
     .section-guarantee {
       padding: 40px 24px 0;
@@ -2522,6 +2709,70 @@
 
     </section>
 
+    <!-- Trusted by -->
+    <section class="section section-trusted">
+
+      <div class="trusted-header">
+        <p class="trusted-eyebrow">Trusted by</p>
+        <div class="trusted-title">
+          <p class="trusted-title-dark">Top performers</p>
+          <p class="trusted-title-accent">&amp; nutrition experts</p>
+        </div>
+        <p class="trusted-body">Some supporting body copy can sit here if we feel like we need some.</p>
+      </div>
+
+      <div class="trusted-carousel-wrap">
+        <div class="trusted-track" id="trustedTrack">
+
+          <div class="trusted-card">
+            <div class="trusted-card-bg">
+              <img src="images/trusted-matt.png" alt="Matt Morsia">
+            </div>
+            <div class="trusted-card-fade"></div>
+            <div class="trusted-card-footer">
+              <div class="trusted-card-author">
+                <span class="trusted-card-name">Matt Morsia</span>
+                <img class="trusted-badge" src="images/trusted-badge.svg" alt="Verified">
+              </div>
+              <p class="trusted-card-quote">"Greens powders usually taste like the contents of your bin but Huel Daily Greens are sick!"</p>
+            </div>
+          </div>
+
+          <div class="trusted-card">
+            <div class="trusted-card-bg">
+              <img src="images/trusted-spencer.png" alt="Spencer Matthews">
+            </div>
+            <div class="trusted-card-fade"></div>
+            <div class="trusted-card-footer">
+              <div class="trusted-card-author">
+                <span class="trusted-card-name">Spencer Matthews</span>
+                <img class="trusted-badge" src="images/trusted-badge.svg" alt="Verified">
+              </div>
+              <p class="trusted-card-quote">"Between races, flights, early starts and long days, fuelling needed to be quick, reliable and consistent. Huel gave me exactly that"</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="trusted-controls">
+          <img class="trusted-stars" src="images/trusted-stars.svg" alt="Trustpilot stars">
+          <div class="trusted-nav">
+            <button class="trusted-nav-btn" id="trustedPrev" aria-label="Previous" disabled>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12.5 15l-5-5 5-5"/>
+              </svg>
+            </button>
+            <button class="trusted-nav-btn" id="trustedNext" aria-label="Next">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7.5 5l5 5-5 5"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
     <!-- 30-day guarantee -->
     <section class="section section-guarantee">
       <div class="guarantee-card">
@@ -2890,6 +3141,53 @@
           let closest = 0, minDist = Infinity;
           cards.forEach((card, i) => {
             const dist = Math.abs((card.offsetLeft - 24) - track.scrollLeft);
+            if (dist < minDist) { minDist = dist; closest = i; }
+          });
+          updateUI(closest);
+        }, 80);
+      }, { passive: true });
+
+      updateUI(0);
+    })();
+  </script>
+
+  <script>
+    // Trusted by carousel
+    (function () {
+      const track = document.getElementById('trustedTrack');
+      const prev  = document.getElementById('trustedPrev');
+      const next  = document.getElementById('trustedNext');
+      const cards = Array.from(track.children);
+      const total = cards.length;
+      let current = 0;
+      let programmatic = false;
+      let timer;
+
+      function updateUI(index) {
+        current = index;
+        prev.disabled = current === 0;
+        next.disabled = current === total - 1;
+      }
+
+      function goTo(index) {
+        index = Math.max(0, Math.min(index, total - 1));
+        programmatic = true;
+        track.scrollTo({ left: cards[index].offsetLeft - 24, behavior: 'smooth' });
+        updateUI(index);
+        clearTimeout(timer);
+        timer = setTimeout(() => { programmatic = false; }, 600);
+      }
+
+      prev.addEventListener('click', () => goTo(current - 1));
+      next.addEventListener('click', () => goTo(current + 1));
+
+      track.addEventListener('scroll', () => {
+        if (programmatic) return;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          let closest = 0, minDist = Infinity;
+          cards.forEach((c, i) => {
+            const dist = Math.abs((c.offsetLeft - 24) - track.scrollLeft);
             if (dist < minDist) { minDist = dist; closest = i; }
           });
           updateUI(closest);
