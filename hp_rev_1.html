@@ -1543,9 +1543,23 @@
       width: 100%;
     }
 
-    .trusted-stars {
-      height: 12px;
-      width: auto;
+    .trusted-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .trusted-dot {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.35);
+      width: 8px;
+      transition: width 0.25s ease, background 0.25s ease;
+    }
+
+    .trusted-dot.active {
+      width: 20px;
+      background: #ffffff;
     }
 
     .trusted-nav {
@@ -2755,7 +2769,10 @@
         </div>
 
         <div class="trusted-controls">
-          <img class="trusted-stars" src="images/trusted-stars.svg" alt="Trustpilot stars">
+          <div class="trusted-dots" id="trustedDots">
+            <span class="trusted-dot active"></span>
+            <span class="trusted-dot"></span>
+          </div>
           <div class="trusted-nav">
             <button class="trusted-nav-btn" id="trustedPrev" aria-label="Previous" disabled>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -3155,6 +3172,7 @@
     // Trusted by carousel
     (function () {
       const track = document.getElementById('trustedTrack');
+      const dots  = Array.from(document.querySelectorAll('#trustedDots .trusted-dot'));
       const prev  = document.getElementById('trustedPrev');
       const next  = document.getElementById('trustedNext');
       const cards = Array.from(track.children);
@@ -3165,6 +3183,7 @@
 
       function updateUI(index) {
         current = index;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
         prev.disabled = current === 0;
         next.disabled = current === total - 1;
       }
